@@ -1,0 +1,18 @@
+Set up project outline, installing dependencies:
+    1. npm install nodemon --save-dev
+        nodemon for watching app in development stage
+    2. npm install @babel/core @babel/node --save-dev
+        Babel transpiles your code to vanilla JavaScript
+    3. npm install @babel/preset-env --save-dev
+        add .babelrc preset
+    4. npm install dotenv --save
+        -allows the .env variables in the source code to work
+        -Add import 'dotenv/config' to the file using the .env variables
+    5. npm install express
+        -install the app, initialize it and use app.lister(port)
+    6. npm install cors
+        -Cross origian resource sharing, using this will allow other web sites to use ours
+    7. npm install mongoose 
+        -Install for mongoose models and the mongoDB interface
+    8. npm install ejs 
+        -install ejs as the view engine, also add the following to app.js: app.set('view engine', 'ejs');
