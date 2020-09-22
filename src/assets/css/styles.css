@@ -1,8 +1,57 @@
-body {
-  color: blue;
+header {
+    width: 100%;
+    height: 50px;
+    background-color: limegreen;
+    color: whitesmoke;
 }
 
-#header {
-  background-color: green;
-  color: yellow;
+#header-logo {
+    display: inline-block;
+    width: 15%;
+    float: left;
+    color: black;    
+}
+
+a {
+    text-decoration: none; 
+    color: whitesmoke;
+}
+
+a:hover {
+    color: grey;
+    opacity: 50%;
+}
+
+.header-text {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-size: large;
+    text-align: center;
+    padding-top: 10px;
+}
+
+#header-about {
+    display: inline-block;
+    width: 15%;
+    float: left;
+
+}
+
+#header-login {
+    display: inline-block;
+    width: 15%;
+    float: right;
+}
+
+#header-signup {
+    display: inline-block;
+    width: 15%;
+    float: right;
+}
+
+body {
+  background-color: yellow;
+}
+
+#test {
+    color: red;
 }

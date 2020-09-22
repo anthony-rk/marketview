@@ -1,20 +1,27 @@
 import 'dotenv/config';
-// import cors from 'cors';
-// import express from 'express'; 
 
 const express = require('express');
-const cors = require('cors')
+const cors = require('cors');
 const path = require('path');
+const partials = require('express-partials');
+const mongoose = require('mongoose');
 
-// import models from './models';
-// import routes from './routes';
+// Setup MongoDB connection
+const mongoDb = process.env.MONGODB_URI;
+mongoose.connect(mongoDb, { useUnifiedTopology: true, useNewUrlParser: true});
+const db = mongoose.connection;
+db.on("error", console.error.bind(console, "mongo connection error"));
 
 const indexRouter = require('./routes/index');
 
 const app = express();
 
+
 app.set('view engine', 'ejs');
+app.use(partials());
+
 app.set('views', path.join(__dirname, '/views'));
+
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
