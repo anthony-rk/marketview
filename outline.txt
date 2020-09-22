@@ -16,14 +16,24 @@ Set up project outline, installing dependencies:
         -Install for mongoose models and the mongoDB interface
     8. npm install ejs 
         -install ejs as the view engine, also add the following to app.js: app.set('view engine', 'ejs');
+    9. npm install mongoose
+        -Needed for MongoDB connection ( https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs/mongoose#Designing_the_LocalLibrary_models )
 
 Next Steps:
-1. Set up MongoDB and get the User model working
+DONE:
+    1. Set up MongoDB and get the User model working
+
 2. Set up Authentication with Passport using Tokens optionally
-3. Get Stylesheets to work with ejs views
-    -Probably has to do with static route, need to move app.js to route of folder
-        and then move everything to Public folder like ni the members-only project
-    -Try a new project with express-generator to see how it is laid out
-    --app.use(express.static('src')); had to use the preceeding...
+
+DONE:
+    3. Get Stylesheets to work with ejs views
+        -Probably has to do with static route, need to move app.js to route of folder
+            and then move everything to Public folder like ni the members-only project
+        -Try a new project with express-generator to see how it is laid out
+        --app.use(express.static('src')); had to use the preceeding...
+
 4. Get an understanding of the Alpha Vantage API
+
 5. Maybe use Python for charting the stock data
+
+6. Get POST to work for new user sign up
