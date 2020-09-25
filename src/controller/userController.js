@@ -86,6 +86,15 @@ exports.user_create_post = [
     }
 }];
 
+// Display user Login form
+exports.user_login_get = function(req, res) {
+    res.render('login', { title: 'New User Login'} );
+};
+
+exports.user_login_post = function(req, res) {
+
+};
+
 // Log in || Log out //
 // exports.user_login = function(req, res) {
 
@@ -104,30 +113,3 @@ exports.user_create_post = [
 //     req.logout();
 //     res.redirect("/");
 //   });
-
-/**
- * POST /signup
- * Create a new local account.
- */
-// exports.user_create_post = (req, res, next) => {
-//     const user = new User({
-//       email: req.body.email,
-//       username: req.body.username,
-//       password: req.body.password,
-//     });
-  
-//     User.findOne({ email: req.body.email }, (err, existingUser) => {
-//       if (err) {
-//         return next(err);
-//       }
-//       if (existingUser) {
-//         return res.redirect('/login');
-//       }
-//       user.save(err => {
-//         if (err) {
-//           return next(err);
-//         }
-//           res.redirect('/');
-//         });
-//       });
-//   };

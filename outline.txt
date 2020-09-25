@@ -36,4 +36,6 @@ DONE:
 
 5. Maybe use Python for charting the stock data
 
-6. Get POST to work for new user sign up
+DONE:
+    6. Get POST to work for new user sign up
+        --had to set method="POST" not action="POST"
