@@ -9,12 +9,12 @@ const { sanitizeBody } = require('express-validator');
 
 // Display user sign up form
 exports.user_create_get = function(req, res) {
-    res.render('new_user_sign_up_form', { title: 'New User Sign Up'} );
+    res.render('signup', { title: 'New User Sign Up'} );
 };
 
 // Create new user from User sign up POST request
 exports.user_create_post = [
-    
+
     // Validate fields.
     body('username').isLength({ min: 1 }).trim().withMessage('Username must be specified.'),
     body('password')
@@ -57,7 +57,7 @@ exports.user_create_post = [
 
         if (!errors.isEmpty()) {
             // There are errors. Render form again with sanitized values/errors messages.
-            res.render('new_user_sign_up_form', { title: 'New User Sign Up', errors: errors.array() });
+            res.render('signup', { title: 'New User Sign Up', errors: errors.array() });
             return;
         }
         else {
@@ -104,3 +104,30 @@ exports.user_create_post = [
 //     req.logout();
 //     res.redirect("/");
 //   });
+
+/**
+ * POST /signup
+ * Create a new local account.
+ */
+// exports.user_create_post = (req, res, next) => {
+//     const user = new User({
+//       email: req.body.email,
+//       username: req.body.username,
+//       password: req.body.password,
+//     });
+  
+//     User.findOne({ email: req.body.email }, (err, existingUser) => {
+//       if (err) {
+//         return next(err);
+//       }
+//       if (existingUser) {
+//         return res.redirect('/login');
+//       }
+//       user.save(err => {
+//         if (err) {
+//           return next(err);
+//         }
+//           res.redirect('/');
+//         });
+//       });
+//   };
