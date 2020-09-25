@@ -3,6 +3,7 @@ var router = express.Router();
 
 // const user_controller = require('../controller/userController');
 var userController = require('../controller/userController');
+const user = require('../models/user');
 
 router.get('/', (req, res) => {
     res.render('index');
@@ -18,18 +19,9 @@ router.get('/signup', (req, res) => {
 
 router.post('/signup', userController.user_create_post);
 
-// Test for POST
-// router.post('/signup', (req, res) => {
-//     res.send("hello there!");
-// });
 
-router.get('/login', (req, res) => {
-    res.render('login');
-});
+router.get('/login', userController.user_login_get);
 
-// Test for POST
-router.post('/login', (req, res) => {
-    res.send("hello there login page!");
-});
+// router.post('/login', userController.user_login_post);
 
 module.exports = router;
