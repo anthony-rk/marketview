@@ -1,6 +1,7 @@
 import 'dotenv/config';
 
 const express = require('express');
+const cookieParser = require('cookie-parser');
 const cors = require('cors');
 const path = require('path');
 const partials = require('express-partials');
@@ -31,7 +32,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 app.use(express.static('src'));
-
+app.use(cookieParser());
 app.use(cors());
 
 // PassportJS Authentication below
@@ -77,26 +78,18 @@ app.use(function(req, res, next) {
   next();
 });
 
-
 app.use('/', indexRouter);
 
+// Quickly check what cookies we have
+app.get('/cookies', function (req, res) {
+  // Cookies that have not been signed
+  console.log('Cookies: ', req.cookies)
 
+  // Cookies that have been signed
+  console.log('Signed Cookies: ', req.signedCookies)
 
-// Log in || Log out //
-app.post(
-    "/login",
-    passport.authenticate("local", {
-        successRedirect: "/about",
-        failureRedirect: "/signup",
-    })
-
-);
-  
-  app.get("/logout", (req, res) => {
-    req.logout();
-    res.redirect("/");
-  });
-
+  console.log(res.locals.currentUser)
+});
 
 app.listen(process.env.PORT || 3000, () => 
     console.log("Example app listening on port " + process.env.PORT +  "!")
