@@ -1,12 +1,13 @@
 var express = require('express');
 var router = express.Router();
 
-// const user_controller = require('../controller/userController');
 var userController = require('../controller/userController');
-const user = require('../models/user');
+const User = require('../models/user');
+
+const passport = require("passport");
 
 router.get('/', (req, res) => {
-    res.render('index');
+    res.render('index', { user: req.user });
 });
 
 router.get('/about', (req, res) => {
@@ -19,9 +20,17 @@ router.get('/signup', (req, res) => {
 
 router.post('/signup', userController.user_create_post);
 
-
 router.get('/login', userController.user_login_get);
 
-// router.post('/login', userController.user_login_post);
+router.post('/login', 
+  passport.authenticate('local', { failureRedirect: '/login' }),
+  function(req, res) {
+    res.redirect('/');
+});
+
+router.get("/logout", (req, res) => {
+  req.logout();
+  res.redirect("/");
+});
 
 module.exports = router;
