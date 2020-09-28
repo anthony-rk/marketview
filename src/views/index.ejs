@@ -7,7 +7,12 @@
   <body>
     <%- include('./partials/header.ejs'); %>
     <div id="container">
-      <div id="test">Test Test</div>  
+      <% if (user) {%>
+        <h1>WELCOME BACK <%= user.username %></h1>
+        <a class='logout-link' href="/logout">LOG OUT</a>
+      <% } else { %>
+        <h1>please log in</h1>
+      <%}%>
     </div>
   </body>
 </html>

@@ -3,12 +3,21 @@
     <div id='header-logo' class="header-text">
         <a href="/">Marketview</a>
     </div>
+
     <div id='header-about' class="header-text">
         <a href="/about">About</a>
     </div>
-    <div id='header-login' class="header-text">
-        <a href="/login">Login</a>
-    </div>
+
+    <% if (!currentUser) {%>
+        <div id='header-login' class="header-text">
+            <a href="/login">Login</a>
+        </div>
+      <% } else { %>
+        <div id='header-login' class="header-text">
+            <a href="/logout">Logout</a>
+        </div>
+      <%}%>
+
     <div id='header-signup' class="header-text">
         <a href="/signup">Sign Up</a>
     </div>
