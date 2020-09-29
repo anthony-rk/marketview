@@ -6,20 +6,32 @@ const User = require('../models/user');
 
 const passport = require("passport");
 
+// Index route handler
 router.get('/', (req, res) => {
-    res.render('index', { user: req.user });
+    try {
+        // async/await
+        async function stockGetter() {
+        const user = await User.findOne({username: 'Market_Mark'}).exec();
+
+        res.render('index', { user: req.user, userStocks: user.stocks} );
+        };
+        stockGetter()
+    } catch (err) { console.log(err) };
 });
 
+// About page route handler
 router.get('/about', (req, res) => {
     res.render('about');
 });
 
+// Signup specific route handlers
 router.get('/signup', (req, res) => {
     res.render('signup');
 });
 
 router.post('/signup', userController.user_create_post);
 
+// Login specific route handlers
 router.get('/login', userController.user_login_get);
 
 router.post('/login', 
@@ -28,9 +40,43 @@ router.post('/login',
     res.redirect('/');
 });
 
-router.get("/logout", (req, res) => {
+router.get('/logout', (req, res) => {
   req.logout();
   res.redirect("/");
 });
+
+// Test route for Charting API
+router.get('/charting', (req, res) => {
+    res.render('charting');
+});
+
+// Add a stock to the user's portfolio
+router.post('/add-stock', (req, res) => {
+    // User.findOne({username: 'Market_Mark'}, function(err, user) {
+    User.findOne({username: req.user.username}, function(err, user) {
+        console.log(user);
+        user.stocks.push(req.body.stock);
+        user.save();
+    });
+    res.redirect('/');
+    // console.log(req.body.stock);
+});
+
+// Delete a stock to the user's portfolio
+router.post('/delete-stock', (req, res) => {
+    // User.findOne({username: 'Market_Mark'}, function(err, user) {
+    User.findOne({username: req.user.username}, function(err, user) {
+        
+        const stockIndex = user.stocks.indexOf(req.body.stock);
+        // const stockIndex = user.stocks.indexOf('FB');
+        if (stockIndex > -1) { user.stocks.splice(stockIndex, 1) }
+
+        user.save();
+    });
+    
+    res.redirect('/');
+});
+
+
 
 module.exports = router;

@@ -1,6 +1,7 @@
 var User = require('../models/user');
 
 const bcrypt = require("bcryptjs");
+const async = require('async');
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 
@@ -91,25 +92,41 @@ exports.user_login_get = function(req, res) {
     res.render('login', { title: 'New User Login'} );
 };
 
-exports.user_login_post = function(req, res) {
-
+exports.user_add_stock_post = (req, res) => {
+    // need to find user, then add to their Stock array
+    res.render('/');
 };
 
-// Log in || Log out //
-// exports.user_login = function(req, res) {
+exports.user_get_stocks1 = (req, res) => { 
+    User.findOne({username: 'Market_Mark'}, function(err, user) {
+        return user.stocks;
+    });
+};
 
-// }
+exports.user_get_stocks = function(req, res, next) {
 
-// app.post(
-//     "/users/log-in",
-//     passport.authenticate("local", {
-//         successRedirect: "/messages",
-//         failureRedirect: "/users/log-in",
-//         failureFlash: true
-//     })
-//   );
-  
-//   app.get("/users/log-out", (req, res) => {
-//     req.logout();
-//     res.redirect("/");
-//   });
+    // async.parallel({
+    //     user_instance: function(callback) {
+    //         let stocks = User.findOne({username: 'Market_Mark'}).exec(callback);
+    //         // BookInstance.findById(req.params.id).populate('user').exec(callback)
+    //     },
+    // }, function(err, results) {
+    //     if (err) { return next(err); }
+    //     if (results.user_instance==null) { // No results.
+    //         res.redirect('/');
+    //     }
+    //     // Successful, so render.
+    //     res.render('/', { user: req.user, user_instance: results.user_instance} );
+    // });
+
+
+    // async/await
+    async function stockGetter() {
+        const userStocks = await User.findOne({username: 'Market_Mark'}).exec();
+        
+        res.render('/', { user: req.user, userStocks: userStocks} );
+        // console.log(user.stocks)
+    };
+    stockGetter()
+
+};
