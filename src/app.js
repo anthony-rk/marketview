@@ -6,10 +6,13 @@ const cors = require('cors');
 const path = require('path');
 const partials = require('express-partials');
 const mongoose = require('mongoose');
+// const async = require('async');
 const session = require("express-session");
 const bcrypt = require("bcryptjs");
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
+// const ApexCharts = require("apexcharts");
+// import ApexCharts from 'apexcharts';
 var User = require('./models/user');
 
 
@@ -75,6 +78,11 @@ passport.deserializeUser(function(id, done) {
 
 app.use(function(req, res, next) {
   res.locals.currentUser = req.user;
+  next();
+});
+
+app.use(function(req, res, next) {
+  res.locals.stockOjb = req.stock;
   next();
 });
 

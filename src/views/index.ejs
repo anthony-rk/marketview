@@ -8,11 +8,37 @@
     <%- include('./partials/header.ejs'); %>
     <div id="container">
       <% if (user) {%>
-        <h1>WELCOME BACK <%= user.username %></h1>
-        <a class='logout-link' href="/logout">LOG OUT</a>
+        <h1>Welcome back <%= user.username %>!</h1>
       <% } else { %>
         <h1>please log in</h1>
       <%}%>
+
+      <%- include('./partials/chart.ejs'); %>
+
+      <div id='stock-ticker-container'>
+        <form action='add-stock' method='POST'>
+            <label for="stock">Stock Ticker:</label>
+            <input type="text" name="stock" value="WORK">
+    
+            <input type="submit", value="Add">
+        </form>
+    
+        <div id='user-stocks-list'>
+          <% if (user) { %>
+            <% var stocksArray = userStocks; %>
+    
+            <% for(var i = 0; i < stocksArray.length; i++) { %> 
+              <h2 class="stock-ticker"> <%= stocksArray[i] + " is the stockTicker" %> </h2> 
+              <form action='delete-stock' method='POST'>
+                
+                <input type="submit", value="<%= stocksArray[i] %>" name="stock" value="Delete" >
+                <!-- <input type="submit", value="Add"> -->
+              </form>
+            <% } %>
+        <% } %>
+        </div>
+    
+    </div>
     </div>
   </body>
 </html>
