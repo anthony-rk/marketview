@@ -8,6 +8,26 @@ const LocalStrategy = require("passport-local").Strategy;
 const { body,validationResult } = require('express-validator');
 const { sanitizeBody } = require('express-validator');
 
+// Display Index page
+exports.user_get_index = function(req, res) {
+    // async/await
+    async function stockGetter() {
+        const user = await User.findOne({username: req.user.username}).exec();
+
+        res.render('index', { user: req.user, userStocks: user.stocks} );
+    };
+    try {
+        if (req.user) {
+            stockGetter();
+        } else {
+            res.render('index', { user: '', userStocks: []});
+        }
+
+    } catch (err) { 
+        console.log(err)
+    };
+};
+
 // Display user sign up form
 exports.user_create_get = function(req, res) {
     res.render('signup', { title: 'New User Sign Up'} );
@@ -129,4 +149,29 @@ exports.user_get_stocks = function(req, res, next) {
     };
     stockGetter()
 
+};
+
+exports.user_add_stock = function(req, res) {
+    User.findOne({username: req.user.username}, function(err, user) {
+        user.stocks.push(req.body.stock);
+        user.save();
+    });
+    res.redirect('/');
+};
+
+exports.user_delete_stock = function(req, res) {
+    User.findOne({username: req.user.username}, function(err, user) {
+        let stockInputString = req.body.stock.split(" ");
+        
+        const stockIndex = user.stocks.indexOf(stockInputString[1]);
+        
+        if (stockIndex > -1) { 
+            user.stocks.splice(stockIndex, 1) ;
+        } else {
+            console.log("Could not remove stock at index " + stockIndex);
+        }
+        user.save();
+    });
+    
+    res.redirect('/');
 };
