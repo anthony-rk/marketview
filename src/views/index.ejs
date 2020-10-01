@@ -28,7 +28,8 @@
             <% var stocksArray = userStocks; %>
     
             <% for(var i = 0; i < stocksArray.length; i++) { %> 
-              <h2 class="stock-ticker"> <%= stocksArray[i] + " is the stockTicker" %> </h2> 
+              <!-- <h2 class="stock-ticker"> <%= stocksArray[i] %> </h2>  -->
+              <a class="stock-grab-link" href="/get-stock-data/<%= stocksArray[i] %>">Get Stock Data for <%= stocksArray[i] %></a>
               <form action='delete-stock' method='POST'>
                 
                 <!-- <input type="submit" value="<%= stocksArray[i] %>" name="stock" value="Delete" > -->
