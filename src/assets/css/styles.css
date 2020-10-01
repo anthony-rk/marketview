@@ -22,6 +22,9 @@ a:hover {
     opacity: 50%;
 }
 
+a.logout-link {
+    color: red;
+}
 .header-text {
     font-family: Verdana, Geneva, Tahoma, sans-serif;
     font-size: large;
@@ -50,6 +53,17 @@ a:hover {
 
 body {
   background-color: yellow;
+}
+
+#chart {
+    width: 75%;
+    float: left;
+}
+
+#stock-ticker-container {
+    width: 25%;
+    float: right;
+    text-align: center;
 }
 
 #test {
