@@ -31,8 +31,8 @@
               <h2 class="stock-ticker"> <%= stocksArray[i] + " is the stockTicker" %> </h2> 
               <form action='delete-stock' method='POST'>
                 
-                <input type="submit", value="<%= stocksArray[i] %>" name="stock" value="Delete" >
-                <!-- <input type="submit", value="Add"> -->
+                <!-- <input type="submit" value="<%= stocksArray[i] %>" name="stock" value="Delete" > -->
+                <input type="submit", value="Delete <%= stocksArray[i] %>" name="stock">
               </form>
             <% } %>
         <% } %>
