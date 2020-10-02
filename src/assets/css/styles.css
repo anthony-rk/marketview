@@ -66,6 +66,10 @@ body {
     text-align: center;
 }
 
+.stock-grab-link {
+    color: black;
+}
+
 #test {
     color: red;
 }
