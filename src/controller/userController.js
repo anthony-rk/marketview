@@ -20,7 +20,7 @@ exports.user_get_index = function(req, res) {
         if (req.user) {
             stockGetter();
         } else {
-            res.render('index', { user: '', userStocks: []});
+            res.render('index', { user: '', userStocks: ['AAPL']});
         }
 
     } catch (err) { 
@@ -112,16 +112,16 @@ exports.user_login_get = function(req, res) {
     res.render('login', { title: 'New User Login'} );
 };
 
-exports.user_add_stock_post = (req, res) => {
-    // need to find user, then add to their Stock array
-    res.render('/');
-};
+// exports.user_add_stock_post = (req, res) => {
+//     // need to find user, then add to their Stock array
+//     res.render('/');
+// };
 
-exports.user_get_stocks1 = (req, res) => { 
-    User.findOne({username: 'Market_Mark'}, function(err, user) {
-        return user.stocks;
-    });
-};
+// exports.user_get_stocks1 = (req, res) => { 
+//     User.findOne({username: 'Market_Mark'}, function(err, user) {
+//         return user.stocks;
+//     });
+// };
 
 exports.user_get_stocks = function(req, res, next) {
 
