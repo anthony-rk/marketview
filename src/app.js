@@ -81,11 +81,6 @@ app.use(function(req, res, next) {
   next();
 });
 
-app.use(function(req, res, next) {
-  res.locals.stockOjb = req.stock;
-  next();
-});
-
 app.use('/', indexRouter);
 
 // Quickly check what cookies we have

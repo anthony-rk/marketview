@@ -4,6 +4,7 @@ const bcrypt = require("bcryptjs");
 const async = require('async');
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
+const fetch = require("node-fetch");
 
 const { body,validationResult } = require('express-validator');
 const { sanitizeBody } = require('express-validator');
@@ -14,13 +15,24 @@ exports.user_get_index = function(req, res) {
     async function stockGetter() {
         const user = await User.findOne({username: req.user.username}).exec();
 
-        res.render('index', { user: req.user, userStocks: user.stocks} );
+        if (typeof user.stocks[0] !== 'undefined') {
+            let userStockToDisplay = user.stocks[0];
+            res.redirect(`/get-stock-data/${userStockToDisplay}`);      
+            console.log(1);
+            console.log(user.stocks[0]);
+        } else {
+            let userStockToDisplay = 'FB';
+            res.redirect(`/get-stock-data/${userStockToDisplay}`);      
+
+            console.log(2);
+        }
     };
     try {
         if (req.user) {
             stockGetter();
         } else {
-            res.render('index', { user: '', userStocks: ['AAPL']});
+            let userStockToDisplay = 'FB';
+            res.redirect(`/get-stock-data/${userStockToDisplay}`);    
         }
 
     } catch (err) { 
@@ -112,45 +124,6 @@ exports.user_login_get = function(req, res) {
     res.render('login', { title: 'New User Login'} );
 };
 
-// exports.user_add_stock_post = (req, res) => {
-//     // need to find user, then add to their Stock array
-//     res.render('/');
-// };
-
-// exports.user_get_stocks1 = (req, res) => { 
-//     User.findOne({username: 'Market_Mark'}, function(err, user) {
-//         return user.stocks;
-//     });
-// };
-
-exports.user_get_stocks = function(req, res, next) {
-
-    // async.parallel({
-    //     user_instance: function(callback) {
-    //         let stocks = User.findOne({username: 'Market_Mark'}).exec(callback);
-    //         // BookInstance.findById(req.params.id).populate('user').exec(callback)
-    //     },
-    // }, function(err, results) {
-    //     if (err) { return next(err); }
-    //     if (results.user_instance==null) { // No results.
-    //         res.redirect('/');
-    //     }
-    //     // Successful, so render.
-    //     res.render('/', { user: req.user, user_instance: results.user_instance} );
-    // });
-
-
-    // async/await
-    async function stockGetter() {
-        const userStocks = await User.findOne({username: 'Market_Mark'}).exec();
-        
-        res.render('/', { user: req.user, userStocks: userStocks} );
-        // console.log(user.stocks)
-    };
-    stockGetter()
-
-};
-
 exports.user_add_stock = function(req, res) {
     User.findOne({username: req.user.username}, function(err, user) {
         user.stocks.push(req.body.stock);
@@ -174,4 +147,25 @@ exports.user_delete_stock = function(req, res) {
     });
     
     res.redirect('/');
+};
+
+exports.get_stock_price_history_data = function(req, res) {
+    const stockTicker = req.params.stockTicker;
+
+    let site = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=' + stockTicker + '&apikey=' + process.env.ALPHAVANTAGE_API_KEY;
+
+    console.log(site);
+
+    let requestOptions = {
+        method: 'GET',
+        redirect: 'follow'
+      };
+
+    let response = fetch(site, requestOptions)
+        .then(response => response.json())
+        .then(result => {            
+            res.render('index', {stockResponse: result});
+            
+        })
+        .catch(error => console.log('error', error))
 };

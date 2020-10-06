@@ -36,11 +36,6 @@ router.get('/logout', (req, res) => {
   res.redirect("/");
 });
 
-// Test route for Charting API
-// router.get('/charting', (req, res) => {
-//     res.render('charting', {stockResponse: { stockname: 'AAPL', }})
-// });
-
 // Add a stock to the user's portfolio
 router.post('/add-stock', userController.user_add_stock);
 
@@ -48,59 +43,6 @@ router.post('/add-stock', userController.user_add_stock);
 router.post('/delete-stock', userController.user_delete_stock);
 
 // Get stock data for charting from Alpha Vantage API
-router.get('/get-stock-data/:stockTicker', (req, res) => {    
-    const stockTicker = req.params.stockTicker;
-
-    let site = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=' + stockTicker + '&apikey=' + process.env.ALPHAVANTAGE_API_KEY;
-
-    console.log(site);
-
-    let requestOptions = {
-        method: 'GET',
-        redirect: 'follow'
-      };
-
-    let response = fetch(site, requestOptions)
-        .then(response => response.json())
-        .then(result => {
-            // console.log('Result below', result)
-            // let stockResponse = result;
-            res.render('charting', {stockResponse: result});
-        })
-        .catch(error => console.log('error', error))
-
-        
-    // res.render('charting', {stockResponse: {
-    //     stock: 'AAPL'
-    // }});
-
-        // Do I need to wait longer here for data to load?
-        // .then(data => {
-            // let stockResponse = {};
-            // res.render('charting', {stockResponse: result});
-
-            // res.redirect('charting');
-              
-        // })
-        
-        // .catch(error => console.log('error', error))
-});
-
-// OBJECT PASSING TEST PAGE
-router.get('/passing', function(req, res) {
-    var mascots = [
-        { name: 'Sammy', organization: "DigitalOcean", birth_year: 2012},
-        { name: 'Tux', organization: "Linux", birth_year: 1996},
-        { name: 'Moby Dock', organization: "Docker", birth_year: 2013}
-    ];
-    var tagline = "No programming concept is complete without a cute animal mascot.";
-
-    res.render('passing', {
-        mascots: mascots,
-        tagline: tagline
-    });
-});
-
-
+router.get('/get-stock-data/:stockTicker', userController.get_stock_price_history_data);
 
 module.exports = router;
