@@ -6,13 +6,10 @@ const cors = require('cors');
 const path = require('path');
 const partials = require('express-partials');
 const mongoose = require('mongoose');
-// const async = require('async');
 const session = require("express-session");
 const bcrypt = require("bcryptjs");
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
-// const ApexCharts = require("apexcharts");
-// import ApexCharts from 'apexcharts';
 var User = require('./models/user');
 
 

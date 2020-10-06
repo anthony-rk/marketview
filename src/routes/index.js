@@ -37,7 +37,7 @@ router.get('/logout', (req, res) => {
 });
 
 // Add a stock to the user's portfolio
-router.post('/add-stock', userController.user_add_stock);
+router.post('/get-stock-data/add-stock', userController.user_add_stock);
 
 // Delete a stock from the user's portfolio
 router.post('/delete-stock', userController.user_delete_stock);
