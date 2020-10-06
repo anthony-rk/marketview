@@ -7,14 +7,15 @@
   <body>
     <%- include('./partials/header.ejs'); %>
     <div id="container">
-      <% if (user) {%>
-        <h1>Welcome back <%= user.username %>!</h1>
+      <% if (currentUser) {%>
+        <h1>Welcome back <%= currentUser.username %>!</h1>
       <% } else { %>
-        <h1>please log in</h1>
+        <h1>Please Log In or Sign Up</h1>
       <%}%>
-
+      
       <%- include('./partials/chart.ejs'); %>
-
+      
+      
       <div id='stock-ticker-container'>
         <form action='add-stock' method='POST'>
             <label for="stock">Stock Ticker:</label>
@@ -24,8 +25,8 @@
         </form>
     
         <div id='user-stocks-list'>
-          <% if (user) { %>
-            <% var stocksArray = userStocks; %>
+          <% if (currentUser) { %>
+            <% var stocksArray = currentUser.stocks; %>
     
             <% for(var i = 0; i < stocksArray.length; i++) { %> 
               <!-- <h2 class="stock-ticker"> <%= stocksArray[i] %> </h2>  -->
