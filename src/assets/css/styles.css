@@ -66,9 +66,30 @@ body {
     text-align: center;
 }
 
+#add-stock-form {
+    margin-bottom: 20px;
+}
+
 .stock-grab-link {
     color: black;
+    width: 65%;
+    height: 30px;
+    display: inline-block;
+    float: left;
+    text-align: center;
+    background-color: blue;
+    color: white;
 }
+
+.stock-delete-link {
+    color: black;
+    width: 35%;
+    height: 30px;
+    display: inline-block;
+    margin-bottom: 5px;    
+    background-color: red;
+}
+
 
 #test {
     color: red;

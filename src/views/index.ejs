@@ -15,9 +15,8 @@
       
       <%- include('./partials/chart.ejs'); %>
       
-      
       <div id='stock-ticker-container'>
-        <form action='add-stock' method='POST'>
+        <form action='add-stock' method='POST' id="add-stock-form">
             <label for="stock">Stock Ticker:</label>
             <input type="text" name="stock" value="WORK">
     
@@ -30,12 +29,14 @@
     
             <% for(var i = 0; i < stocksArray.length; i++) { %> 
               <!-- <h2 class="stock-ticker"> <%= stocksArray[i] %> </h2>  -->
-              <a class="stock-grab-link" href="/get-stock-data/<%= stocksArray[i] %>">Get Stock Data for <%= stocksArray[i] %></a>
-              <form action='delete-stock' method='POST'>
-                
-                <!-- <input type="submit" value="<%= stocksArray[i] %>" name="stock" value="Delete" > -->
-                <input type="submit", value="Delete <%= stocksArray[i] %>" name="stock">
-              </form>
+              <div>
+                <!-- <a class="stock-grab-link" href="/get-stock-data/<%= stocksArray[i] %>">Get Stock Data for <%= stocksArray[i] %></a> -->
+                <a class="stock-grab-link" href="/get-stock-data/<%= stocksArray[i] %>"><%= stocksArray[i] %> </a>
+
+                <form action='delete-stock' method='POST' >
+                  <input type="submit", value="Delete <%= stocksArray[i] %>" name="stock" class="stock-delete-link">
+                </form>
+              </div>
             <% } %>
         <% } %>
         </div>
