@@ -40,7 +40,7 @@ router.get('/logout', (req, res) => {
 router.post('/get-stock-data/add-stock', userController.user_add_stock);
 
 // Delete a stock from the user's portfolio
-router.post('/delete-stock', userController.user_delete_stock);
+router.post('/get-stock-data/delete-stock', userController.user_delete_stock);
 
 // Get stock data for charting from Alpha Vantage API
 router.get('/get-stock-data/:stockTicker', userController.get_stock_price_history_data);
