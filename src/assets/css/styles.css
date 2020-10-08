@@ -73,13 +73,17 @@ body {
     color: palevioletred;
 }
 
+.user-stock-single-entry {
+    width: 100%;
+}
+
 .stock-grab-link {
-    color: black;
     width: 65%;
     height: 30px;
     display: inline-block;
     float: left;
     text-align: center;
+
     background-color: #3e9ff8;
     color: white;
 }
