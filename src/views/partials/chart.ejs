@@ -4,7 +4,7 @@
 </span>
 <% }%>
 
-<div id='chart'></div>
+<!-- <div id='chart'></div> -->
 
 <script>
 
@@ -82,64 +82,6 @@
 
         var chart = new ApexCharts(document.querySelector('#chart'), options);
         chart.render();
-
-    
-    
-    // Post fake data holder in the chart
     } 
-    // else {
-        // Fix this fake data later
-        // let data = [10, 41, 35, 51, 49, 62, 69, 91, 148];
-        // let categories = ['2020-09-01', '2020-09-02', '2020-09-03', '2020-09-04', '2020-09-05', '2020-09-06', '2020-09-07', '2020-09-08', '2020-09-09'];
-        // let stockTicker = 'FB';
-
-        // var options = {
-        //     series: [{
-        //         name: "Stock Close Price",
-        //         // Add the stock prices below here
-        //         data: data
-        //     }],
-        //     chart: {
-        //         height: 350,
-        //         type: 'line',
-        //         zoom: {
-        //             enabled: false
-        //         }
-        //     },
-        //     dataLabels: {
-        //         enabled: false
-        //     },
-        //     stroke: {
-        //         curve: 'straight'
-        //     },
-        //     title: {
-        //         text: stockTicker,
-        //         align: 'left',
-        //         margin: 10,
-        //         offsetX: 0,
-        //         offsetY: 0,
-        //         floating: false,
-        //         style: {
-        //             fontSize:  '14px',
-        //             fontWeight:  'bold',
-        //             fontFamily:  undefined,
-        //             color:  'red'
-        //         }
-        //     },
-        //     grid: {
-        //         row: {
-        //             colors: ['#f3f3f3', 'transparent'], // takes an array which will be repeated on columns
-        //             opacity: 0.5
-        //         },
-        //     },
-        //     xaxis: {
-        //         // Add the dates here
-        //         categories: categories,
-        //     }
-        // };
-
-        // var chart = new ApexCharts(document.querySelector('#chart'), options);
-        // chart.render();
-    // }
 
 </script>
