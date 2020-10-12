@@ -134,9 +134,11 @@ exports.user_add_stock = function(req, res) {
 
 exports.user_delete_stock = function(req, res) {
     User.findOne({username: req.user.username}, function(err, user) {
-        let stockInputString = req.body.stock.split(" ");
+        // let stockInputString = req.body.stock.split(" ");
+
+        const stockTicker = req.params.stockTicker;
         
-        const stockIndex = user.stocks.indexOf(stockInputString[1]);
+        const stockIndex = user.stocks.indexOf(stockTicker);
         
         if (stockIndex > -1) { 
             user.stocks.splice(stockIndex, 1) ;
@@ -152,20 +154,55 @@ exports.user_delete_stock = function(req, res) {
 exports.get_stock_price_history_data = function(req, res) {
     const stockTicker = req.params.stockTicker;
 
-    let site = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=' + stockTicker + '&apikey=' + process.env.ALPHAVANTAGE_API_KEY;
+    let siteForStockData = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=' + stockTicker + '&apikey=' + process.env.ALPHAVANTAGE_API_KEY;
+    let siteForCompanyData = 'https://www.alphavantage.co/query?function=OVERVIEW&symbol=' + stockTicker + '&apikey=' + process.env.ALPHAVANTAGE_API_KEY;
 
-    console.log(site);
+    
+    // console.log(siteForCompanyData);
 
     let requestOptions = {
         method: 'GET',
         redirect: 'follow'
       };
 
-    let response = fetch(site, requestOptions)
-        .then(response => response.json())
-        .then(result => {            
-            res.render('index', {stockResponse: result});
+    // let responseForStockData = fetch(siteForStockData, requestOptions)
+    //     .then(responseForStockData => responseForStockData.json())
+    //     .then(result => {            
+    //         res.render('index', {stockResponse: result});
             
+    //     })
+    //     .catch(error => console.log('error', error))
+
+
+    // Need to fetch from 2 Sites, then render the index
+    function fetchStockDetails(api_url, options) {
+        return fetch(api_url, options)
+        .then(response => response.json())
+        .then(data => {
+            return data;
         })
         .catch(error => console.log('error', error))
+      }
+      
+      function fetchCompanyDetails(api_url, options) {
+        return fetch(api_url, options)
+        .then(response => response.json())
+        .then(data => {
+            return data;
+        })
+        .catch(error => console.log('error', error))
+      }
+      
+      // Anonymous Async function to fetch the stock and company details then render the index view
+      (async () => {
+        const stockResponse = await fetchStockDetails(siteForStockData, requestOptions);
+        const stockCompanyResponse = await fetchCompanyDetails(siteForCompanyData, requestOptions);
+
+      res.render('index', {
+          stockResponse: stockResponse,
+          stockCompanyResponse: stockCompanyResponse,
+        });
+      
+      })();
+
 };
