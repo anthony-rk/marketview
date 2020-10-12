@@ -1,0 +1,29 @@
+<span id='variableJSONCompanyInfo' hidden>
+    <%= JSON.stringify(stockCompanyResponse); %>
+</span>
+
+<div id="stock-company-info-container">
+    <div id="stock-company-title">
+        Company Name: 
+    </div>
+    <div id="stock-company-about">
+        About: 
+    </div>
+</div>
+
+
+<script>
+    // Had to stick the data in the HTML, then access it in the script below like so...
+    let variableJSONCompanyInfo = JSON.parse(document.getElementById('variableJSONCompanyInfo').innerHTML);
+    document.getElementById('variableJSONCompanyInfo').remove();
+
+    let companyTitle = variableJSONCompanyInfo['Name'];
+    let companyDescription = variableJSONCompanyInfo['Description'];
+
+    // document.getElementById('stock-company-title').innerHTML =  'Company: ' + variableJSONCompanyInfo['Name'];
+    document.getElementById('stock-company-title').innerHTML = companyTitle;
+
+    // document.getElementById('stock-company-about').innerHTML =  'About: ' + variableJSONCompanyInfo['Description'];
+    document.getElementById('stock-company-about').innerHTML = companyDescription;
+
+</script>
