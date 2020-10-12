@@ -1,6 +1,8 @@
-<span id='variableJSONCompanyInfo' hidden>
-    <%= JSON.stringify(stockCompanyResponse); %>
-</span>
+<% if (typeof stockCompanyResponse !== 'undefined') { %>
+    <span id='variableJSONCompanyInfo' hidden>
+        <%= JSON.stringify(stockCompanyResponse); %>
+    </span>
+<% } %>
 
 <div id="stock-company-info-container">
     <div id="stock-company-title">
@@ -20,10 +22,18 @@
     let companyTitle = variableJSONCompanyInfo['Name'];
     let companyDescription = variableJSONCompanyInfo['Description'];
 
-    // document.getElementById('stock-company-title').innerHTML =  'Company: ' + variableJSONCompanyInfo['Name'];
-    document.getElementById('stock-company-title').innerHTML = companyTitle;
 
-    // document.getElementById('stock-company-about').innerHTML =  'About: ' + variableJSONCompanyInfo['Description'];
-    document.getElementById('stock-company-about').innerHTML = companyDescription;
+    // Need a check if this is undefined
+    if (companyTitle != 'undefined') {
+        document.getElementById('stock-company-title').innerHTML = companyTitle;
+    } else {
+        document.getElementById('stock-company-title').innerHTML = '';
+    }
+
+    if (companyDescription != 'undefined') {
+        document.getElementById('stock-company-about').innerHTML = companyDescription;
+    } else {
+        document.getElementById('stock-company-about').innerHTML = '';
+    }
 
 </script>
