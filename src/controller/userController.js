@@ -1,9 +1,6 @@
 var User = require('../models/user');
 
 const bcrypt = require("bcryptjs");
-const async = require('async');
-const passport = require("passport");
-const LocalStrategy = require("passport-local").Strategy;
 const fetch = require("node-fetch");
 
 const { body,validationResult } = require('express-validator');
@@ -18,13 +15,13 @@ exports.user_get_index = function(req, res) {
         if (typeof user.stocks[0] !== 'undefined') {
             let userStockToDisplay = user.stocks[0];
             res.redirect(`/get-stock-data/${userStockToDisplay}`);      
-            console.log(1);
-            console.log(user.stocks[0]);
+            // console.log(1);
+            // console.log(user.stocks[0]);
         } else {
             let userStockToDisplay = 'FB';
             res.redirect(`/get-stock-data/${userStockToDisplay}`);      
 
-            console.log(2);
+            // console.log(2);
         }
     };
     try {
@@ -134,8 +131,7 @@ exports.user_add_stock = function(req, res) {
 
 exports.user_delete_stock = function(req, res) {
     User.findOne({username: req.user.username}, function(err, user) {
-        // let stockInputString = req.body.stock.split(" ");
-
+    
         const stockTicker = req.params.stockTicker;
         
         const stockIndex = user.stocks.indexOf(stockTicker);
@@ -155,24 +151,12 @@ exports.get_stock_price_history_data = function(req, res) {
     const stockTicker = req.params.stockTicker;
 
     let siteForStockData = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=' + stockTicker + '&apikey=' + process.env.ALPHAVANTAGE_API_KEY;
-    let siteForCompanyData = 'https://www.alphavantage.co/query?function=OVERVIEW&symbol=' + stockTicker + '&apikey=' + process.env.ALPHAVANTAGE_API_KEY;
-
-    
-    // console.log(siteForCompanyData);
+    let siteForCompanyData = 'https://www.alphavantage.co/query?function=OVERVIEW&symbol=' + stockTicker + '&apikey=' + process.env.ALPHAVANTAGE_API_KEY2;
 
     let requestOptions = {
         method: 'GET',
         redirect: 'follow'
       };
-
-    // let responseForStockData = fetch(siteForStockData, requestOptions)
-    //     .then(responseForStockData => responseForStockData.json())
-    //     .then(result => {            
-    //         res.render('index', {stockResponse: result});
-            
-    //     })
-    //     .catch(error => console.log('error', error))
-
 
     // Need to fetch from 2 Sites, then render the index
     function fetchStockDetails(api_url, options) {
@@ -197,6 +181,8 @@ exports.get_stock_price_history_data = function(req, res) {
       (async () => {
         const stockResponse = await fetchStockDetails(siteForStockData, requestOptions);
         const stockCompanyResponse = await fetchCompanyDetails(siteForCompanyData, requestOptions);
+
+        console.log(stockCompanyResponse);
 
       res.render('index', {
           stockResponse: stockResponse,
