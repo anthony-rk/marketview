@@ -1,8 +1,10 @@
+/* CSS for the Index route */
 header {
     width: 100%;
     height: 50px;
     background-color: #3e9ff8;
     color: whitesmoke;
+    box-shadow: 0px 2px 5px #888;
 }
 
 #header-logo {
@@ -66,17 +68,27 @@ body {
     float: left;
 }
 
+/* CSS for the Stock list to the right of the Chart */
 #stock-ticker-container {
     width: 25%;
     float: right;
     text-align: center;
-    /* display: inline-block; */
-    /* display: block; */
+    
 }
 
 #add-stock-form {
-    margin-bottom: 20px;
-    color: palevioletred;
+    margin-bottom: 10px;
+    padding-top: 5px;
+    font-size: large;
+    
+    color: #FF4500;
+    color: white;
+    background-color: lightgray;
+    background-color: darkgrey;
+    height: 32px;
+
+    border: 1px solid #555;
+    box-shadow: 0px 1px 2px #888;
 }
 
 .user-stock-single-entry {
@@ -84,37 +96,46 @@ body {
 }
 
 .stock-grab-link {
-    width: 65%;
+    width: 63%;
     height: 30px;
     display: inline-block;
     float: left;
     text-align: center;
+    padding-top: 6px;
 
     background-color: #3e9ff8;
     color: white;
+
+    box-shadow: 0px 2px 5px #888;
+    border: 1px solid #555;
 }
 
 .stock-delete-link {
     color: black;
-    width: 35%;
+    width: 33%;
     height: 30px;
     display: inline-block;
     margin-bottom: 5px;    
-    background-color: #FF4500;;
+    background-color: #FF4500;
+    padding-top: 6px;
+
+    box-shadow: 0px 2px 5px #888;
+    border: 1px solid #555;
 }
 
-/* Add a nice border here */
+/* CSS for the Stock Info below the Chart */
 #stock-company-info-container {
     text-align: left;
-    background-color: blue;
-    background-color: grey;
-    color: white;
+    background-color: lightgray;
+    color: black;
     position: absolute;
     width: 70%;
+    border: 1px solid #555;
+    box-shadow: 0px 1px 2px #888;
 }
 
 #stock-company-title {
-    color: yellow;
+    color: #FF4500;
     font-size: larger;
     margin-left: 10px;
     margin-bottom: 10px;
@@ -123,4 +144,71 @@ body {
 #stock-company-about {
     font-size: small;
     margin: 5px 10px;
+}
+
+/* CSS for the login route */
+#login-block {
+    margin: 0 auto;
+    margin-top: 20px;
+    padding-top: 30px;
+    padding-bottom: 5px;
+    text-align: center;
+    
+    width: 400px;
+    height: 200px;
+    
+    background-color: #3ecff8;
+
+    border: 1px solid #555;
+    box-shadow: 0px 1px 2px #888;
+}
+
+.form-label {
+    color: black;
+    font-size: larger;
+    margin-right: 130px;
+}
+
+.form-input {
+    color: black;
+    font-size: larger;
+
+    margin-bottom: 15px;
+}
+
+.form-submit {
+    width: 100px;
+    height: 25px;
+    box-shadow: 0px 1px 2px #888;
+}
+
+
+/* CSS for the Signup route */
+#signup-block {
+    margin: 0 auto;
+    margin-top: 20px;
+    padding-top: 30px;
+    padding-bottom: 5px;
+    text-align: center;
+    
+    /* width: 35%; */
+    width: 400px;
+    height: 300px;
+    
+    background-color: #3ecff8;
+
+    border: 1px solid #555;
+    box-shadow: 0px 1px 2px #888;
+}
+
+.confirm-password-form-label {
+    color: black;
+    font-size: larger;
+    margin-right: 65px;
+}
+
+.email-form-label {
+    color: black;
+    font-size: larger;
+    margin-right: 159px;
 }

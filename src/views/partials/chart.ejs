@@ -31,12 +31,12 @@
         entries.reverse();
 
         entries.forEach( (key) => {
-            data.push(key[1]['4. close']);        
+            data.push(key[1]['5. adjusted close']);        
         });
 
         var options = {
             series: [{
-                name: "Stock Close Price",
+                name: "Ajusted Close",
                 // Add the stock prices below here in data array
                 data: data
             }],
