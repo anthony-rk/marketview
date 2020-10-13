@@ -14,12 +14,14 @@ exports.user_get_index = function(req, res) {
 
         if (typeof user.stocks[0] !== 'undefined') {
             let userStockToDisplay = user.stocks[0];
-            res.redirect(`/get-stock-data/${userStockToDisplay}`);      
+            // res.redirect(`/get-stock-data/${userStockToDisplay}`);
+            res.redirect(`/stocks/${userStockToDisplay}`);
             // console.log(1);
             // console.log(user.stocks[0]);
         } else {
-            let userStockToDisplay = 'FB';
-            res.redirect(`/get-stock-data/${userStockToDisplay}`);      
+            let userStockToDisplay = 'AAPL';
+            // res.redirect(`/get-stock-data/${userStockToDisplay}`);
+            res.redirect(`/stocks/${userStockToDisplay}`);
 
             // console.log(2);
         }
@@ -29,7 +31,7 @@ exports.user_get_index = function(req, res) {
             stockGetter();
         } else {
             let userStockToDisplay = 'FB';
-            res.redirect(`/get-stock-data/${userStockToDisplay}`);    
+            res.redirect(`/stocks/${userStockToDisplay}`);
         }
 
     } catch (err) { 
@@ -150,7 +152,10 @@ exports.user_delete_stock = function(req, res) {
 exports.get_stock_price_history_data = function(req, res) {
     const stockTicker = req.params.stockTicker;
 
-    let siteForStockData = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=' + stockTicker + '&apikey=' + process.env.ALPHAVANTAGE_API_KEY;
+    // let siteForStockData = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=' + stockTicker + '&apikey=' + process.env.ALPHAVANTAGE_API_KEY;
+    
+    let siteForStockData = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=' + stockTicker + '&apikey=' + process.env.ALPHAVANTAGE_API_KEY;
+    
     let siteForCompanyData = 'https://www.alphavantage.co/query?function=OVERVIEW&symbol=' + stockTicker + '&apikey=' + process.env.ALPHAVANTAGE_API_KEY2;
 
     let requestOptions = {
@@ -182,6 +187,7 @@ exports.get_stock_price_history_data = function(req, res) {
         const stockResponse = await fetchStockDetails(siteForStockData, requestOptions);
         const stockCompanyResponse = await fetchCompanyDetails(siteForCompanyData, requestOptions);
 
+        console.log(stockResponse);
         console.log(stockCompanyResponse);
 
       res.render('index', {
