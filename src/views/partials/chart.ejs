@@ -9,7 +9,7 @@
 <script>
 
     // Checks if we have the stockResponse in the span element above, if not render the base case stock chart
-    var stockDataElement = document.getElementById("variableJSON");
+    var stockDataElement = document.getElementById("variableJSON"); 
  
     if (typeof(stockDataElement) != 'undefined' && stockDataElement != null){
         let variableJSON = JSON.parse(document.getElementById('variableJSON').innerHTML);

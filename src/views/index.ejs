@@ -7,42 +7,52 @@
   <body>
     <%- include('./partials/header.ejs'); %>
     <div id="container">
+      <div class="top-row">
+        <% if (currentUser) {%>
+          <h1>Welcome back <%= currentUser.username %>!</h1>
+        <% } else { %>
+          <h1>Please Log In or Sign Up</h1>
+        <%}%>
+        
+      </div>
+
       
-      <% if (currentUser) {%>
-        <h1>Welcome back <%= currentUser.username %>!</h1>
-      <% } else { %>
-        <h1>Please Log In or Sign Up</h1>
-      <%}%>
-      
+
       <div class="row">
+        <!-- <div class="row-edge-border-left">left</div> -->
+
         <div id='chart'></div>
         <%- include('./partials/chart.ejs'); %>
       
         <div id='stock-ticker-container'>
+
           <form action='add-stock' method='POST' id="add-stock-form">
-            <label for="stock">Stock Ticker:</label>
-            <input type="text" name="stock" value="WORK">
+            <label class="stock-input-form-component" for="stock">Ticker:</label>
+            <input class="stock-input-form-component"  type="text" name="stock" value="WORK">
     
-            <input type="submit", value="Add">
-          </form>
-      
-          <div id='user-stocks-list'>
-            <% if (currentUser) { %>
-              <% var stocksArray = currentUser.stocks; %>
-      
-              <% for(var i = 0; i < stocksArray.length; i++) { %> 
-                <div class="user-stock-single-entry">
-                  <a class="stock-grab-link" href="/stocks/<%= stocksArray[i] %>"><%= stocksArray[i] %> </a>
-                  <a class="stock-delete-link" href="/delete-stock/<%= stocksArray[i] %>">Delete <%= stocksArray[i] %> </a>
-                </div>
-              <% } %>
-          <% } %>
-          </div>
+            <input class="stock-input-form-component" type="submit", value="Add">
+          </form>          
+            <div id='user-stocks-list'>
+              <% if (currentUser) { %>
+                <% var stocksArray = currentUser.stocks; %>
+        
+                <% for(var i = 0; i < stocksArray.length; i++) { %> 
+                  <div class="user-stock-single-entry">
+                    <a class="stock-grab-link" href="/stocks/<%= stocksArray[i] %>"><%= stocksArray[i] %> </a>
+                    <a class="stock-delete-link" href="/delete-stock/<%= stocksArray[i] %>">Delete <%= stocksArray[i] %> </a>
+                  </div>
+                <% } %>
+            <% } %>
+            </div>
         </div>
+        <!-- <div class="row-edge-border-right"></div> -->
       </div>
 
+
       <div class="row">
+
         <%- include('./partials/company-info.ejs'); %>
+        
       </div>
     
     </div>
