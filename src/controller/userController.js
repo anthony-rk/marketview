@@ -14,16 +14,10 @@ exports.user_get_index = function(req, res) {
 
         if (typeof user.stocks[0] !== 'undefined') {
             let userStockToDisplay = user.stocks[0];
-            // res.redirect(`/get-stock-data/${userStockToDisplay}`);
             res.redirect(`/stocks/${userStockToDisplay}`);
-            // console.log(1);
-            // console.log(user.stocks[0]);
         } else {
             let userStockToDisplay = 'AAPL';
-            // res.redirect(`/get-stock-data/${userStockToDisplay}`);
             res.redirect(`/stocks/${userStockToDisplay}`);
-
-            // console.log(2);
         }
     };
     try {
@@ -151,8 +145,6 @@ exports.user_delete_stock = function(req, res) {
 
 exports.get_stock_price_history_data = function(req, res) {
     const stockTicker = req.params.stockTicker;
-
-    // let siteForStockData = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY&symbol=' + stockTicker + '&apikey=' + process.env.ALPHAVANTAGE_API_KEY;
     
     let siteForStockData = 'https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=' + stockTicker + '&apikey=' + process.env.ALPHAVANTAGE_API_KEY;
     
@@ -196,5 +188,4 @@ exports.get_stock_price_history_data = function(req, res) {
         });
       
       })();
-
 };

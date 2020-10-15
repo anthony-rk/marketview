@@ -6,6 +6,7 @@
 
   <body>
     <%- include('./partials/header.ejs'); %>
+    
     <div id="container">
       <div class="top-row">
         <% if (currentUser) {%>
@@ -19,8 +20,6 @@
       
 
       <div class="row">
-        <!-- <div class="row-edge-border-left">left</div> -->
-
         <div id='chart'></div>
         <%- include('./partials/chart.ejs'); %>
       
@@ -45,17 +44,12 @@
             <% } %>
             </div>
         </div>
-        <!-- <div class="row-edge-border-right"></div> -->
       </div>
-
 
       <div class="row">
-
         <%- include('./partials/company-info.ejs'); %>
-        
       </div>
-    
+  
     </div>
-    
   </body>
 </html>
