@@ -20,10 +20,12 @@ Set up project outline, installing dependencies:
         -Needed for MongoDB connection ( https://developer.mozilla.org/en-US/docs/Learn/Server-side/Express_Nodejs/mongoose#Designing_the_LocalLibrary_models )
 
 Next Steps:
+
 DONE:
     1. Set up MongoDB and get the User model working
 
-2. Set up Authentication with Passport using Tokens optionally
+DONE:
+    2. Set up Authentication with Passport using Tokens optionally
 
 DONE:
     3. Get Stylesheets to work with ejs views
@@ -32,10 +34,34 @@ DONE:
         -Try a new project with express-generator to see how it is laid out
         --app.use(express.static('src')); had to use the preceeding...
 
-4. Get an understanding of the Alpha Vantage API
+DONE:
+    4. Get an understanding of the Alpha Vantage API
 
-5. Maybe use Python for charting the stock data
+DONE:
+    5. Maybe use Python for charting the stock data
 
 DONE:
     6. Get POST to work for new user sign up
         --had to set method="POST" not action="POST"
+DONE:
+    7. Create an Object for container the stock tickers, user should be able to add new stocks to the object.
+        - Clicking the object should rechart with the correct data
+        --Ended up using an Array in the User Model for storing Stock tickers.
+
+8. Validate that the stocks are real that the user tries to submit
+    1. Check if stock ticker exists through an API? 
+    2. Make sure the stock ticker gos toUppercase() before putting into the stock array.
+
+
+
+DONE:
+    9. Got the JSON stock data, how to pass that back to the chart.ejs view and show the correct data?  
+        -https://www.digitalocean.com/community/tutorials/how-to-use-ejs-to-template-your-node-application
+
+10. CSS Visual Updates:
+    1. Make the stock background color change if the user has it currently selected
+    2. Make the stock holder div a scrollable thing so that the chart stays in place if the user list is very long
+    3. Organize the stocks in Alphabetical order?
+
+11. Allow user to select different date ranges
+    1. Filter the data based off the Months? 
