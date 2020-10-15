@@ -179,8 +179,8 @@ exports.get_stock_price_history_data = function(req, res) {
         const stockResponse = await fetchStockDetails(siteForStockData, requestOptions);
         const stockCompanyResponse = await fetchCompanyDetails(siteForCompanyData, requestOptions);
 
-        console.log(stockResponse);
-        console.log(stockCompanyResponse);
+        // console.log(stockResponse);
+        // console.log(stockCompanyResponse);
 
       res.render('index', {
           stockResponse: stockResponse,

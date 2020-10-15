@@ -4,11 +4,10 @@
   "engines": {
     "node": "12.13.1"
   },
-  "private": true,
   "description": "",
   "main": "app.js",
   "scripts": {
-    "start": "node app.js",
+    "start": "babel-node src/app.js",
     "devstart": "nodemon --exec babel-node src/app.js"
   },
   "repository": {
