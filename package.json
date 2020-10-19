@@ -8,7 +8,8 @@
   "main": "app.js",
   "scripts": {
     "start": "babel-node src/app.js",
-    "devstart": "nodemon --exec babel-node src/app.js"
+    "devstart": "nodemon --exec babel-node src/app.js",
+    "build": "babel src/app.js"
   },
   "repository": {
     "type": "git",
@@ -21,7 +22,8 @@
   },
   "homepage": "https://github.com/anthony-rk/marketview#readme",
   "devDependencies": {
-    "@babel/core": "^7.11.6",
+    "@babel/cli": "^7.12.1",
+    "@babel/core": "^7.12.3",
     "@babel/node": "^7.10.5",
     "@babel/preset-env": "^7.11.5",
     "nodemon": "^2.0.4"
@@ -29,7 +31,6 @@
   "dependencies": {
     "apexcharts": "^3.21.0",
     "async": "^3.2.0",
-    "babel-cli": "^6.26.0",
     "bcryptjs": "^2.4.3",
     "body-parser": "^1.19.0",
     "cookie-parser": "^1.4.5",
