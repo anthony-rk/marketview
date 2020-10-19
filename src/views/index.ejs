@@ -46,6 +46,19 @@
         </div>
       </div>
 
+      <div class="row-for-stock-timeline">
+        <div class="stock-timeline">
+          <% var timeFrames = ['Day', 'Week', 'Month', 'Year']; %>
+
+          <% for(var i = 0; i < timeFrames.length; i++) { %> 
+            <div class="links-for-stock-timeline">
+              <a href="/stocks/">1 <%= timeFrames[i] %></a>  
+            </div>
+          <% } %>
+        
+        </div>
+      </div>
+
       <div class="row">
         <%- include('./partials/company-info.ejs'); %>
       </div>
