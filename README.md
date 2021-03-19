@@ -2,10 +2,14 @@
 
 **Open the App here:** https://marketview-app.herokuapp.com/
 
-The goal of this project was to create a full-stack web application where a users can sign-up, login and add stocks to their watchlist. The stock data is fetched via an API and charted on the webpage. 
+A full-stack web application with user generation, allowing users to create a portfolio of stocks to track. The stock data is fetched via an API and charted on the webpage. I utilized vanilla JavaScript, MondDB, Node.js and Express to create this app. 
 
 ![Example Screenshot](./src/images/example_image.png)
 
-Download the file, run npm run start and go to localhost:3000 to see the app live. 
+### Running the code
+ - git clone https://github.com/anthony-rk/marketview.git 
+ - npm install
+ - npm run start
+ - Open localhost:3000 
 
-**Technologies used:** HTML, CSS, JavaScript (ES6), Node.js, express, NPM, GitHub CLI, Heroku CLI
+**Technologies used:** HTML, CSS, JavaScript (ES6), MongoDB, Node.js, express, NPM, GitHub CLI, Heroku CLI
